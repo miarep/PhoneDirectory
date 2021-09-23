@@ -1,11 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DepartmentService } from './department.service';
+import { Department } from './department';
 
 @Component({
     selector: 'app',
-    template: `<label>Введите имя:</label>
-                 <input [(ngModel)]="name" placeholder="name">
-                 <h2>Добро пожаловать {{name}}!</h2>`
+    templateUrl: './app.component.html',
+    providers: [DepartmentService]
 })
-export class AppComponent {
-    name = '';
+export class AppComponent implements OnInit {
+
+    departments: Department[];                // массив товаров
+
+    constructor(private departmentService: DepartmentService) { }
+
+    ngOnInit() {
+        this.loadDepartments();    // загрузка данных при старте компонента  
+    }
+    // получаем данные через сервис
+    loadDepartments() {
+        this.departmentService.get()
+            .subscribe((data: Department[]) => this.departments = data);
+    }
 }

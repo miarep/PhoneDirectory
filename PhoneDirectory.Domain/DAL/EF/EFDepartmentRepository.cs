@@ -13,7 +13,7 @@ namespace PhoneDirectory.Domain.DAL.EF
 
         public IEnumerable<Department> GetAll()
         {
-            var departments = db.Departments;
+            var departments = db.Departments.Include(d => d.Employees).ThenInclude(e => e.Position);
             return departments;
         }
         public Department GetById(int id)

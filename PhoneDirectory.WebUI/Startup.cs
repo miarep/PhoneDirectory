@@ -25,13 +25,15 @@ namespace PhoneDirectory.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*
+            
             services.AddTransient<IEmployeeRepository, EFEmployeeRepository>();
             services.AddTransient<IPositionRepository, EFPositionRepository>();
             services.AddTransient<IDepartmentRepository, EFDepartmentRepository>();
 
-            services.AddControllersWithViews();
-            */
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -52,6 +54,13 @@ namespace PhoneDirectory.WebUI
             {
                 app.UseSpaStaticFiles();
             }
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSpa(spa =>
             {

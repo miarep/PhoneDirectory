@@ -14,7 +14,7 @@ namespace PhoneDirectory.Domain.DAL.EF
         public DatabaseContext()
         {
             //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
             //Database.Migrate();
         }
 
@@ -37,7 +37,7 @@ namespace PhoneDirectory.Domain.DAL.EF
                     .Build();
                 var connectionString = configuration.GetConnectionString("PhoneDirectory");
                 optionsBuilder
-                    .UseSqlServer(connectionString);
+                    .UseSqlServer(connectionString);//.UseLazyLoadingProxies();
             }
         }
 
