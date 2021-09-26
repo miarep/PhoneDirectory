@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using PhoneDirectory.Domain.Entity;
 using PhoneDirectory.Domain.Abstract;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Newtonsoft.Json;
 
 namespace PhoneDirectory.WebUI.Controllers
 {
@@ -13,16 +16,18 @@ namespace PhoneDirectory.WebUI.Controllers
     public class DepartmentController : Controller
     {
         private IDepartmentRepository DepartmentRepository;
+
         public DepartmentController(IDepartmentRepository depRepo)
         {
             DepartmentRepository = depRepo;
         }
         
+        [Authorize]
+        [HttpGet]
+        [Route("getrootdepartments")]
         public IEnumerable<Department> Get()
         {
-            var result = DepartmentRepository.GetAll().ToList();
-           
-            return result;
+            return DepartmentRepository.GetRootDepartments().Where(x => x.ParentId == null).ToList();
         }
     }
 }

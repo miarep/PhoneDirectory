@@ -1,24 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { DepartmentService } from './department.service';
-import { Department } from './department';
+import { Component } from '@angular/core';
+import { AuthService } from './service/auth.service'
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    providers: [DepartmentService]
+    styleUrls: ['./app.component.css']
+    
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-    departments: Department[];                // массив товаров
+    currentYear: number = new Date().getFullYear();
 
-    constructor(private departmentService: DepartmentService) { }
+    isAuthenticated: boolean;
 
-    ngOnInit() {
-        this.loadDepartments();    // загрузка данных при старте компонента  
+    constructor(private auth: AuthService) {
     }
-    // получаем данные через сервис
-    loadDepartments() {
-        this.departmentService.get()
-            .subscribe((data: Department[]) => this.departments = data);
+
+    onRouterOutletActivate($event) {
+        this.isAuthenticated = this.auth.isAuthenticated();
     }
 }

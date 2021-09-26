@@ -21,38 +21,35 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\department.service.ts" />
-    <None Remove="ClientApp\src\app\department.ts" />
-    <None Remove="ClientApp\src\app\employee.ts" />
-    <None Remove="ClientApp\src\app\position.ts" />
+    <Content Remove="wwwroot\worker.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\service\apiheaderinterceptor.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\employee\employee.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\entity\token.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\worker.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.10" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PhoneDirectory.Domain\PhoneDirectory.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="ClientApp\src\app\department - Копировать.js">
-      <DependentUpon>department.js</DependentUpon>
-    </None>
-    <None Update="ClientApp\src\app\department - Копировать.js.map">
-      <DependentUpon>department.js.map</DependentUpon>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Update="ClientApp\src\app\employee.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">

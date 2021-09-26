@@ -24,6 +24,19 @@ namespace PhoneDirectory.Domain.Entity
         /// <summary>
         /// Сотрудники
         /// </summary>
-        public List<Employee> Employees { get; set; }
+        public List<Position> Positions { get; set; }
+
+        /// <summary>
+        /// Родительское подразделение
+        /// </summary>
+        public Department Parent { get; set; }
+
+        /// <summary>
+        /// Родительское подразделение
+        /// </summary>
+        public int? ParentId { get; set; }
+
+
+        public List<Department> Childrens { get; set; }
     }
 }

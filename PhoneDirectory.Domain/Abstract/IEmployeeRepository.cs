@@ -17,8 +17,15 @@ namespace PhoneDirectory.Domain.Abstract
         /// <summary>
         /// Получить сотрудника по идентификатору
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Идентификатор пользователя</param>
         /// <returns></returns>
-        public Employee GetById(int id);
+        public Employee Get(int id);
+
+        /// <summary>
+        /// Получить сотрудника по логину и паролю
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя</param>
+        /// <returns></returns>
+        public Employee Get(string email, string password);
     }
 }

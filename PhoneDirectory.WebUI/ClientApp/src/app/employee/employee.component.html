@@ -1,0 +1,20 @@
+<div class="container employee-card" *ngIf="emp">
+    <div class="row ">
+        <div class="col-md-2">
+            <img src="{{emp.photoPath}}" alt="{{emp.fio}}" />
+        </div>
+        <div class="col-md-10">
+            <h1>{{emp.fio}}</h1>
+            <ul>
+                <li>Рабочий телефон: <a href="tel:{{emp.phone}}">{{emp.phone}}</a></li>
+                <li>Мобильный телефон: <a href="tel:{{emp.mobilePhone}}">{{emp.mobilePhone}}</a></li>
+                <li>Подразделение: {{emp.position.department.fullName}}</li>
+                <li>Должность: {{emp.position.name}}</li>
+                <li>Дата рождения: {{formateDate(emp.birthDate)}}</li>
+            </ul>
+        </div>
+    </div>    
+</div>
+<div class="container align-content-center" *ngIf="!emp">
+    <strong class="">Выберите сотрудника из списка</strong>  
+</div>

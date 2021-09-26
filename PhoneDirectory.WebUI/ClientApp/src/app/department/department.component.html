@@ -1,0 +1,25 @@
+<ul class="list">
+    <ng-container *ngFor="let department of departments">
+        <li>
+            <strong>{{department.fullName}}</strong>
+
+            <div *ngIf="department.positions">
+                <div class="position" *ngFor="let position of department.positions">
+                    <span class="position">{{position.name}}:</span>
+                    <div *ngIf="position.employees.length > 0">
+                        <a class="employee" *ngFor="let employee of position.employees" (click)="showEmployee(employee)">
+                            {{employee.fio}}
+                        </a>
+                    </div>
+                    <div *ngIf="position.employees.length < 1">
+                        <p class="vacant">Вакантная должность</p>
+                    </div>
+                </div>                
+            </div>
+        </li>
+
+        <li class="sublist" *ngIf="department.childrens.length">
+            <department (empEvent)="showEmployee($event)" [departments]="department.childrens"></department>
+        </li>
+    </ng-container>
+</ul>

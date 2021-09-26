@@ -19,5 +19,11 @@ namespace PhoneDirectory.Domain.Abstract
         /// <param name="id"></param>
         /// <returns></returns>
         public Department GetById(int id);
+
+        /// <summary>
+        /// Получить "корневые" подразделения (Без родителя)
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Department> GetRootDepartments();
     }
 }

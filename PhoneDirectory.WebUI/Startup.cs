@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using PhoneDirectory.Domain.Abstract;
 using PhoneDirectory.Domain.DAL.EF;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace PhoneDirectory.WebUI
 {
@@ -25,15 +28,29 @@ namespace PhoneDirectory.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                        {
+                            ValidateIssuer = false,
+                            ValidateAudience = false,
+                            ValidateLifetime = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("secretsecretsecretsecret")),
+                            ValidateIssuerSigningKey = true
+                        };
+                    }
+                );
+
             services.AddTransient<IEmployeeRepository, EFEmployeeRepository>();
             services.AddTransient<IPositionRepository, EFPositionRepository>();
             services.AddTransient<IDepartmentRepository, EFDepartmentRepository>();
 
+            // Игнорируем возможность зацикливания при сериализации json
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -50,6 +67,7 @@ namespace PhoneDirectory.WebUI
             }
 
             app.UseStaticFiles();
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
@@ -57,10 +75,13 @@ namespace PhoneDirectory.WebUI
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            });            
 
             app.UseSpa(spa =>
             {

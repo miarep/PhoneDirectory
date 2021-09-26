@@ -1,24 +1,16 @@
-﻿<h1>Список моделей</h1>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <td>Модель</td>
-            <td>Производитель</td>
-            <td>ИД</td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let d of departments">
-            
-                <td>{{d.fullName}}</td>
-                <td>{{d.shortName}}</td>
-                <td>{{d.id}}</td>
-                <td>
-                    <span *ngFor="let e of d.employees">
-                        {{e.fio}} - {{e.position.name}}; 
-                    </span>
-                </td>
-        </tr>
-    </tbody>
-</table>
+<body>
+    <div class="wrapper">
+        <header>
+            <app-nav-menu [isAuthenticated]="isAuthenticated"></app-nav-menu>
+        </header>
+        <main>
+            <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+        </main>
+        <footer class="container bg-light">
+            <div class="container">
+                <span>г. Хабаровск {{currentYear}}</span>
+            </div>
+        </footer>
+    </div>    
+</body>
+

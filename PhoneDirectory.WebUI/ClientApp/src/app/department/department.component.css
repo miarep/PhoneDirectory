@@ -1,0 +1,20 @@
+ul.list {
+    
+}
+li.sublist {
+    list-style: none;
+}
+li.sublist ul {
+    list-style: circle;
+}
+ul li a {
+    cursor: pointer;
+    display: block;
+    color: #007bff;
+}
+span.position {
+    text-decoration: underline;
+}
+.vacant {
+    color: #f3bb1e;
+}

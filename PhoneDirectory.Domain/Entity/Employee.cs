@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace PhoneDirectory.Domain.Entity
 {
@@ -31,6 +32,12 @@ namespace PhoneDirectory.Domain.Entity
         /// </summary>
         public string Email { get; set; }
 
+        [JsonIgnore]
+        /// <summary>
+        /// Пароль
+        /// </summary>
+        public string Password { get; set; }
+
         /// <summary>
         /// Рабочий телефон
         /// </summary>
@@ -46,15 +53,6 @@ namespace PhoneDirectory.Domain.Entity
         /// </summary>
         public string PhotoPath{ get; set; }
 
-        /// <summary>
-        /// Подразделение
-        /// </summary>
-        public Department Department { get; set; }
-
-        /// <summary>
-        /// Идентификатор подразделения
-        /// </summary>
-        public int DepartmentId { get; set; }
 
         /// <summary>
         /// Должность
@@ -64,6 +62,7 @@ namespace PhoneDirectory.Domain.Entity
         /// <summary>
         /// Идентификатор должности
         /// </summary>
-        //public int IdPosition { get; set; }
+        public int PositionId { get; set; }        
+
     }
 }

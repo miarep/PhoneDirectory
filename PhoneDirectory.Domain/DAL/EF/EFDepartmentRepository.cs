@@ -13,13 +13,19 @@ namespace PhoneDirectory.Domain.DAL.EF
 
         public IEnumerable<Department> GetAll()
         {
-            var departments = db.Departments.Include(d => d.Employees).ThenInclude(e => e.Position);
+            var departments = db.Departments;
             return departments;
         }
         public Department GetById(int id)
         {
             var department = db.Departments.Find(id);
             return department;
+        }
+
+        public IEnumerable<Department> GetRootDepartments()
+        {
+            var departments = db.Departments.Include(d => d.Parent).Include(d => d.Childrens).Include(d => d.Positions).ThenInclude(p => p.Employees);
+            return departments;
         }
     }
 }
