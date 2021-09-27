@@ -14,12 +14,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.json",
-            "aot": true,
-            "styles": [
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              }
-            ]
+            "aot": true
           },
           "configurations": {
             "production": {
